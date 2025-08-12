@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         // Allows access to the root without authentication to start login flow.
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/", "/internal/token").permitAll()
                         // Protects rest of endpoints.
                         .anyRequest().authenticated()
                 )
