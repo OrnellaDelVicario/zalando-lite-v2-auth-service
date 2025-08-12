@@ -1,4 +1,4 @@
-package com.zalandolite.auth-service.controller;
+package com.zalandolite.auth_service.controller;
 
 import com.zalandolite.auth_service.config.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
