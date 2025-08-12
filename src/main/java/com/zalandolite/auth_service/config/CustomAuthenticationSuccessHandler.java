@@ -1,4 +1,4 @@
-package com.zalandolite.auth_service.config;
+package com.zalandolite.auth_service.config; // Keep your package
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider; // This is your JwtService/JwtTokenProvider
 
     @Autowired
     public CustomAuthenticationSuccessHandler(JwtTokenProvider jwtTokenProvider) {
@@ -35,8 +35,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         // Generates a JWT token for the user.
         String jwtToken = jwtTokenProvider.generateToken(userId);
 
-        // Redirect the user. For testing purposes, we can redirect to a URL
-        // that shows the token. In a real-world app, this would be a UI route.
-        response.sendRedirect("/login-success?token=" + jwtToken);
+        // *** IMPORTANT: Print the token to console logs for debugging, NOT to the browser URL ***
+        System.out.println("DEBUG: Generated JWT for user " + userId + " (for internal use): " + jwtToken);
+
+        // Redirect the user to a success page that IS MAPPED in your WelcomeController
+        // and DO NOT include the token in the URL for security reasons.
+        response.sendRedirect("/user-info");
     }
 }
